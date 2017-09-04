@@ -1,0 +1,58 @@
+{
+    "app_name": "Snoop",
+    "chromium-args": "chromium-browser --disable-web-security  --enable-transparent-visuals  --ppapi-flash-path=plugins/pepflashplayer.dll --ppapi-flash-version=20.0.0.306 ",
+    "description": "Snoop helps you finding accessibility issues in your projects. Author: Samir Dash <sdash@redhat.com>",
+    "dom_storage_quota": "100",
+    "inject_js_start": "control.js",
+    "keywords": [
+        "snoop",
+        "accessibility",
+        "testing"
+    ],
+    "main": "index.html",
+    "name": "Snoop",
+    "nodejs": false,
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    "version": "0.1 Beta",
+    "webexe_settings": {
+        "blacklist": "",
+        "custom_script": "",
+        "download_dir": "/Applications/Web2Executable.app/Contents/MacOS",
+        "export_dir": "/Users/samirdash/Documents/SAMIR_LAB/INNOVATION/SNOOP/snoop_app_source",
+        "force_download": false,
+        "linux-x32": false,
+        "linux-x64": false,
+        "mac-x64": true,
+        "nw_compression_level": 9,
+        "nw_version": "0.20.0",
+        "output_pattern": "Snoop",
+        "sdk_build": false,
+        "uncompressed_folder": false,
+        "whitelist": "",
+        "windows-x32": false,
+        "windows-x64": true
+    },
+    "webkit": {
+        "plugin": true
+    },
+    "window": {
+        "always_on_top": false,
+        "as_desktop": false,
+        "exe_icon": "snooplogo_square.png",
+        "frame": true,
+        "height": 600,
+        "icon": "snooplogo_square.png",
+        "id": "Snoop",
+        "mac_icon": "snooplogo_square.png",
+        "min_height": 600,
+        "min_width": 800,
+        "resizable": true,
+        "show": true,
+        "show_in_taskbar": true,
+        "title": "Snoop",
+        "transparent": false,
+        "visible": true,
+        "visible_on_all_workspaces": true,
+        "width": 800
+    }
+}

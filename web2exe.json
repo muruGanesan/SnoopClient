@@ -1,0 +1,20 @@
+{
+    "webexe_settings": {
+        "blacklist": "",
+        "custom_script": "",
+        "download_dir": "/Applications/Web2Executable.app/Contents/MacOS",
+        "export_dir": "/Users/samirdash/Documents/SAMIR_LAB/INNOVATION/SNOOP/snoop_app_source/snoop_app_output",
+        "force_download": false,
+        "linux-x32": false,
+        "linux-x64": false,
+        "mac-x64": true,
+        "nw_compression_level": 9,
+        "nw_version": "0.20.0",
+        "output_pattern": "Snoop",
+        "sdk_build": false,
+        "uncompressed_folder": false,
+        "whitelist": "",
+        "windows-x32": false,
+        "windows-x64": true
+    }
+}
