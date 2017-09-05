@@ -8,7 +8,8 @@
            
    <link rel="stylesheet" type="text/css" href="css/core.css?s"/>  
 <script src="script/jquery.min.js"></script>
-        
+      
+   
   </head>  
   
     
@@ -25,7 +26,7 @@ iframe {
     display: block;
     
     min-width: 0px;
-    height: 100%;
+   
     margin: 0;
     padding: 0;
     border: 0;
@@ -87,7 +88,7 @@ iframe {
     #snoop_control{
         
          position: absolute;
-        right: 110px; 
+        right: 20px; 
         
     }
     
@@ -110,6 +111,7 @@ iframe {
     .spinner{
         
           display:inline-block;
+         
     }
 .spinner:before {
   content: '';
@@ -141,7 +143,7 @@ id="snoop_frame"
          
 onunload ="StartUpdateURL(this.contentWindow.location)"
 onload="FinishUpdateURL(this.contentWindow.location)" 
-style="width:100%;  "   frameborder="0" scrollbar="yes"
+style="width:100%;  height: 100%; "   frameborder="0" scrollbar="yes"
 nwdisable=true    
 nwfaketop=true    
 nwUserAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"   
@@ -150,252 +152,32 @@ src="welcome.html"   ></iframe>
  </div>
     <div id="snoop_report">
     
- 
+  Report
+   <iframe 
+id="snoop_tts_frame" 
+         width="300px"
+           height="300px"
+onunload =""
+onload="" 
+style="width:300px;  "   frameborder="0" scrollbar="yes"
+nwdisable=true    
+nwfaketop=true    
+nwUserAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"   
+src="spc/demo.html"   ></iframe>
         
         
-<div id="loginModal">    
-        <form id="loginForm" action=""  method="POST">
-        <div class="login-panel panel panel-default">
-        <div class="panel-heading">Please Sign in</div>
-            <div class="panel-body">
-            <div class="form-group">
-                <label class="control-label">username</label>
-                <input type="text" name="username" class="form-control" required="required">
-            </div>
-            <div class="form-group">
-                <label class="control-label">password</label>
-                <input type="password" name="passwd" class="form-control" required="required">
-            </div>
-            <span id="snoop_result" class="alert alert-danger"></span>    
-                <button type="submit" class="btn btn-success loginField">Login</button>
-            </div>
-        </div>
-    </form>
-</div>  
         
         
+
         
          
-        <div id="snoop_profile">
-            <span id="snoop_username">Guest</span><span id="snoop_loginout" ><span onclick='ShowLogin()'>Login</span></span>
-        </div>
+       
         
         
 <!-- the result of the search will be rendered inside this div -->
 <div id="result"></div>
 
-<script>
-    
-window.snoop_var_username = "";
-window.snoop_var_user_type = "";
-window.snoop_var_last_authentication_status = "checked";
-function ShowLogin(){
-    
-    $("#loginModal").show();
-    
-    
-}
-function HideLogin(){
-    
-    $("#loginModal").hide();
-    
-    
-}
-  
-    
-    
-    
- function Update_authentication_ui(){
-     
-     $( "#snoop_result").empty(); 
-     
-     
-     if(snoop_var_username == ""){
-         $( "#snoop_username" ).empty().append( "Guest" );
-         $( "#snoop_loginout" ).empty().append( "<span onclick='ShowLogin()'>Login</span>" );
-         
-         
-         
-        }else if(snoop_var_username != ""){
-         $( "#snoop_username" ).empty().append( window.snoop_var_username );
-         $( "#snoop_loginout" ).empty().append( "<span onclick='Logout()'>Logout</span>" );
-            
-        
-            
-        }else {
-         $( "#snoop_username" ).empty().append( "Guest" );
-         $( "#snoop_loginout" ).empty().append( "<span onclick='ShowLogin()'>Login</span>" ); 
-             
-        }
-     
-     
-     
-     if(window.snoop_var_last_authentication_status == "login_attempted" && window.snoop_var_username == "" ){
-            $( "#snoop_result").empty().append( "<span style='color:red'>Username or password incorrect</span>" ); 
-            ShowLogin();
-        }else{
-            $( "#snoop_result").empty(); 
-            
-        }
- }  
-    
-    
- function Logout(){
-     var url = "http://localhost/snoop/admin/logout_api.php"; // $form.attr( "action" );
-var posting = $.post( url, { username: window.snoop_var_username    } );
-// Put the results in a div
-posting.done(function( data ) {
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
- if(data.indexOf("success")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-        Update_authentication_ui();
- }else if(data.indexOf("loggedin")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
- }else if(data.indexOf("failed")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-     Update_authentication_ui();
- }else if(data.indexOf("expired")> -1){
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
-     
- }else if(data.indexOf("loggedout")> -1){
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "loggedout";
-     Update_authentication_ui();
-     
- }; 
-
-     
-    
-});
-     
- }  
-    
-    
-    
- function Check_Auth(){
-     var url = "http://localhost/snoop/admin/check_auth_api.php"; // $form.attr( "action" );
-var posting = $.post( url, { username: window.snoop_var_username    } );
-// Put the results in a div
-posting.done(function( data ) {
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
- if(data.indexOf("success")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-        Update_authentication_ui();
- }else if(data.indexOf("loggedin")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
- }else if(data.indexOf("failed")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-     Update_authentication_ui();
- }else if(data.indexOf("expired")> -1){
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
-     
- }else if(data.indexOf("loggedout")> -1){
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "loggedout";
-     Update_authentication_ui();
-     
- }; 
-
-     
-    
-});
-     
- }  
-       
-    
-    
-    
-    
-    
-    
-// Attach a submit handler to the form
-$( "#loginForm" ).submit(function( event ) {
-    HideLogin();
-    
-// Stop form from submitting normally
-event.preventDefault();
-// Get some values from elements on the page:
-var $form = $( this );
-var _username = $form.find( "input[name='username']" ).val();
-var _password = $form.find( "input[name='passwd']" ).val();
-var url = "http://localhost/snoop/admin/login_api.php"; // $form.attr( "action" );
-// Send the data using post
-var posting = $.post( url, { username: _username, passwd: _password } );
-// Put the results in a div
-posting.done(function( data ) {
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
- if(data.indexOf("success")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-        Update_authentication_ui();
- }else if(data.indexOf("loggedin")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
- }else if(data.indexOf("failed")> -1){
-        window.snoop_var_username = data.split("||")[1];
-        window.snoop_var_user_type = data.split("||")[2];
-        window.snoop_var_last_authentication_status = "login_attempted";
-     Update_authentication_ui();
- }else if(data.indexOf("expired")> -1){
-        window.snoop_var_username = "";
-        window.snoop_var_user_type = "";
-        window.snoop_var_last_authentication_status = "checked";
-     Update_authentication_ui();
-     
- }; 
-
-     
-    
-});
-});
-    
-    
-    
-    
-    
-    
-    
-Check_Auth();    
-    
-    
-    
-    
-    
-    
-    
-</script>
-
+ 
 
 
         
@@ -430,12 +212,14 @@ Check_Auth();
         
         
     <span id="snoop_control"><input id="snoop_url_addressbar" type="text" value="" />
-    <div id="snoop_spinner" class="spinner"></div><button id="snoop_url_go"   >Load URL</button>
+   <button id="snoop_url_go"   >Load URL <div id="snoop_spinner" class="spinner"></div></button>
         
         
         <button id="snoop_url_testscreen"   >Test Current Screen</button>
         <button id="snoop_url_screenreader_sim"   >Screen-Reader Simulation</button>
-        
+         <span id="snoop_profile">
+            <span id="snoop_username">Guest</span> | <span id="snoop_loginout" ><span onclick='ShowLogin()'>Login</span></span>
+        </span>
         </span>
    
     </div>
@@ -447,124 +231,44 @@ Check_Auth();
     
     
 </body>
- <script type="application/javascript" src="script/inapp_network_check.js"></script> 
-    
-    
+
     
 <script>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-function GetScreenCordinates(obj) {
-        var p = {};
-        p.x = obj.offsetLeft;
-        p.y = obj.offsetTop;
-        while (obj.offsetParent) {
-            p.x = p.x + obj.offsetParent.offsetLeft;
-            p.y = p.y + obj.offsetParent.offsetTop;
-            if (obj == document.getElementsByTagName("body")[0]) {
-                break;
-            }
-            else {
-                obj = obj.offsetParent;
-            }
-        }
-        return p;
-    }
-    
-    
-    
-    
-    
-    
-    var $noopCore = {
-        
-        $core_version:"0.1",
-        $core_prod:"beta",
-        $core_author:"Samir Dash", 
-        $core_license: "MIT License", 
-        $core_email: "sdash@redhat.com", 
-        $core_publish: "2017",
-        $core_repo: "https://github.com/SNOOP-EcoSystem/SnoopCore", 
-        $dom:$("body").html()
-        
-   
-        
-    };
-    
-    
-   alert($noopCore.$dom);  
-    
-   alert($noopCore.b());   
-    
-var input_Arr = $('input[type="text"],input[type="password"]').toArray();
-    
-    
-    
-    
-    
-    
-    
-    for(var i=0; i<input_Arr.length; i++){
-        
-        console.log(input_Arr[i]);
 
-        console.log (GetScreenCordinates(input_Arr[i]) );
-         
+   /* ******************************************************************************************** */      
         
-    }
+
     
   var button_Arr = $( "button" ).toArray();
     
-    for(var i=0; i<input_Arr.length; i++){
+    for(var i=0; i<button_Arr.length; i++){
         
-        console.log(input_Arr[i]);
+      //  console.log(button_Arr[i]);
 
-        console.log (GetScreenCordinates(input_Arr[i]) );
+       // console.log (GetScreenCordinates(input_Arr[i]) );
          
         
     }  
     
  var button_Arr = $( "button" ).toArray();
     
-    for(var i=0; i<input_Arr.length; i++){
+    for(var i=0; i<button_Arr.length; i++){
         
-        console.log(input_Arr[i]);
+      //  console.log(input_Arr[i]);
 
-        console.log (GetScreenCordinates(input_Arr[i]) );
+       // console.log (GetScreenCordinates(input_Arr[i]) );
          
         
     } 
     
    var a_Arr = $( "a" ).toArray();
     
-    for(var i=0; i<input_Arr.length; i++){
+    for(var i=0; i<a_Arr.length; i++){
         
-        console.log(input_Arr[i]);
+       // console.log(input_Arr[i]);
 
-        console.log (GetScreenCordinates(input_Arr[i]) );
+      //  console.log (GetScreenCordinates(input_Arr[i]) );
          
         
     } 
@@ -608,12 +312,26 @@ function StartUpdateURL(URL){
      
     //$('#' +snoopSpinner).show();
     $('#' +snoopAddressBar).css("color", "#ff0000");
-    $('#' +snoopAddressBar).val(URL);
+     if(URL.indexOf("http") == 0){
+     $('#' +snoopAddressBar).val(URL);
+       
+       }else{
+           
+           $('#' +snoopAddressBar).val("");
+       }
 }    
 function FinishUpdateURL(URL){  
      //$('#' +snoopSpinner).hide();
      $('#' +snoopAddressBar).css("color", "#000000");
-    $('#' +snoopAddressBar).val(URL);
+    
+    if(URL.indexOf("http") == 0){
+       $('#' +snoopAddressBar).val(URL);
+       
+       }else{
+           
+           $('#' +snoopAddressBar).val("");
+       }
+    
 }    
    
     
@@ -626,5 +344,16 @@ function FinishUpdateURL(URL){
     
 </script>
 
+<script type="application/javascript" src="script/authentication.js"></script>  
+    <script type="application/javascript" src="script/inapp_network_check.js"></script> 
+<script src="script/$noopcore.js?"></script>
+    
+    
+    
+    
+    
+    
+    
+    
     
 </html>

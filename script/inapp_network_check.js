@@ -24,6 +24,7 @@ function updateIndicatorOff() {
    
      
        document.getElementById("snoop_offline_indicator").style.display= "block"; 
+    Check_Auth();  //also authenticate if the user is logged in or not
        
 }
 function updateIndicatorOn() {
@@ -31,6 +32,7 @@ function updateIndicatorOn() {
    
    
       if(window.location.href.indexOf("index.html")> -1 && document.title.indexOf("Loading...") > -1){
+          
           window.location  = "snoop_frame.html";
           document.getElementById("snoop_offline_indicator").style.display= "none"; 
           

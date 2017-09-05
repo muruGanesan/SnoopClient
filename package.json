@@ -18,7 +18,7 @@
         "blacklist": "",
         "custom_script": "",
         "download_dir": "/Applications/Web2Executable.app/Contents/MacOS",
-        "export_dir": "/Users/samirdash/Documents/SAMIR_LAB/INNOVATION/SNOOP/snoop_app_source",
+        "export_dir": "/Users/samirdash/Documents/SAMIR_LAB/INNOVATION/SNOOP/snoop_app_source/snoop_app_output",
         "force_download": false,
         "linux-x32": false,
         "linux-x64": false,
